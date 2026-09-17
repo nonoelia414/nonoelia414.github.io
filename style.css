@@ -1,0 +1,453 @@
+/* ===================================================================
+   VARIABLES — charte graphique
+=================================================================== */
+:root {
+  --bg-main: #F0EEE4;
+  --bg-alt: #FFFFFF;
+  --accent: #D14D3D;
+  --text: #2D2D2D;
+  --sauge: #7FA894;
+  --bleu: #A9C6E8;
+  --rose: #F2A0A8;
+  --peche: #F5B896;
+  --corail-clair: #F2C4A0;
+
+  --font-title: 'Fredoka', sans-serif;
+  --font-body: 'Poppins', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--bg-main);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .logo {
+  font-family: var(--font-title);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 2.5rem; }
+h3 { font-size: 1.2rem; margin-bottom: .5rem; font-weight: 600; }
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ===================================================================
+   SCROLL PROGRESS BAR + GRAIN TEXTURE
+=================================================================== */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--sauge), var(--accent), var(--bleu));
+  z-index: 200;
+  transition: width .1s linear;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .035;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===================================================================
+   CURSEUR PERSONNALISÉ — point + anneau qui traîne (JS ajoute
+   .cursor-active sur <html> seulement sur pointeur fin, jamais tactile)
+=================================================================== */
+.cursor-dot, .cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 300;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+}
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--accent);
+}
+.cursor-ring {
+  width: 38px; height: 38px;
+  border: 2px solid var(--accent);
+  transition: width .25s ease, height .25s ease, opacity .25s ease, border-color .25s ease;
+}
+html.cursor-active .cursor-dot,
+html.cursor-active .cursor-ring { opacity: 1; }
+html.cursor-active, html.cursor-active a, html.cursor-active button { cursor: none; }
+.cursor-ring.hovered { width: 56px; height: 56px; border-color: var(--sauge); background: rgba(127,168,148,.08); }
+
+/* ===================================================================
+   NAVIGATION A POINTS — suit la section active pendant le scroll
+=================================================================== */
+.scroll-dots {
+  position: fixed;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(45,45,45,.25);
+  background: transparent;
+  transition: transform .3s ease, background .3s ease, border-color .3s ease;
+  position: relative;
+}
+.dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: 22px; top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: var(--text);
+  color: var(--bg-main);
+  font-size: .75rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+}
+.dot:hover::after { opacity: 1; transform: translateY(-50%) translateX(0); }
+.dot:hover { border-color: var(--accent); }
+.dot.active { background: var(--accent); border-color: var(--accent); transform: scale(1.35); }
+
+@media (max-width: 860px) {
+  .scroll-dots, .cursor-dot, .cursor-ring { display: none; }
+}
+
+.section { position: relative; padding: 90px 24px; overflow: hidden; }
+.section-alt { background: var(--bg-alt); }
+.section-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+.eyebrow { color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; font-size: .85rem; margin-bottom: .5rem; }
+.body-text { font-size: 1.02rem; line-height: 1.7; max-width: 60ch; }
+
+/* ===================================================================
+   BOUTONS
+=================================================================== */
+.btn {
+  position: relative;
+  display: inline-block;
+  padding: 14px 32px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  transition: transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -60%;
+  width: 40%; height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.55), transparent);
+  transform: skewX(-20deg);
+  transition: left .6s ease;
+}
+.btn:hover::before { left: 120%; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(209,77,61,.35); }
+.btn-outline { border-color: var(--accent); color: var(--accent); }
+.btn-outline:hover { background: var(--accent); color: #fff; transform: scale(1.05); }
+
+/* ===================================================================
+   NAVBAR
+=================================================================== */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 40px;
+  background: rgba(240, 238, 228, .85);
+  backdrop-filter: blur(10px);
+  transition: box-shadow .3s ease, padding .3s ease;
+}
+.navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,.06); padding: 12px 40px; }
+
+.logo { font-size: 1.4rem; color: var(--text); }
+.logo span { color: var(--accent); }
+
+.nav-links { display: flex; gap: 32px; position: relative; }
+.nav-pill {
+  position: absolute;
+  top: 50%;
+  height: 30px;
+  border-radius: 999px;
+  background: rgba(209, 77, 61, .1);
+  transform: translateY(-50%);
+  transition: left .35s cubic-bezier(.65,0,.35,1), width .35s cubic-bezier(.65,0,.35,1), opacity .3s ease;
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.nav-link {
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+  font-size: .95rem;
+  padding: 4px 0;
+  transition: color .25s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .3s ease;
+}
+.nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); transform-origin: left; }
+.nav-link.active { color: var(--accent); }
+
+.burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; z-index: 101; }
+.burger span { width: 26px; height: 2px; background: var(--text); border-radius: 2px; transition: transform .3s ease, opacity .3s ease; }
+
+/* ===================================================================
+   BLOBS — formes organiques flottantes
+=================================================================== */
+/* .blob-wrap carries position (parallax target, moved by JS);
+   .blob carries shape (float animation, moved by CSS) — kept on separate
+   elements so the two `transform` animations don't fight each other. */
+.blob-wrap {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+}
+.blob {
+  display: block;
+  width: var(--bs);
+  height: var(--bs);
+  background: var(--bc);
+  border-radius: var(--br);
+  filter: blur(2px);
+  opacity: .55;
+  animation: float var(--bd, 8s) ease-in-out infinite alternate;
+}
+@keyframes float {
+  0%   { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-26px) rotate(8deg); }
+}
+
+/* ===================================================================
+   HERO / ACCUEIL
+=================================================================== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  padding-top: 140px;
+  flex-wrap: wrap;
+}
+.hero-content { max-width: 560px; text-align: left; }
+.hero-content h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--text); margin-bottom: .3rem; }
+.title-role { color: var(--accent); font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 600; margin-bottom: 1rem; }
+.tagline { font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem; max-width: 46ch; }
+.hero-cta { display: flex; gap: 18px; flex-wrap: wrap; }
+
+.hero-photo { position: relative; width: 300px; height: 300px; }
+/* wrap carries the mouse-parallax translate (JS); the halo itself carries
+   the CSS spin — split so the two `transform` animations don't collide */
+.photo-halo-wrap {
+  position: absolute;
+  inset: -20px 10px 10px -20px;
+  z-index: 1;
+  transition: transform .3s ease-out;
+}
+.photo-halo {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--sauge), var(--bleu));
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: spin-slow 22s linear infinite;
+}
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.photo-frame {
+  position: relative;
+  z-index: 2;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid var(--bg-main);
+  background: var(--corail-clair);
+}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ===================================================================
+   A PROPOS
+=================================================================== */
+.about-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 50px; align-items: center; }
+.info-card { background: var(--bg-main); border-radius: 24px; padding: 36px; }
+.info-list li { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(45,45,45,.08); }
+.info-list li:last-child { border-bottom: none; }
+.info-label { font-weight: 600; color: var(--accent); }
+
+/* ===================================================================
+   PARCOURS — timeline
+=================================================================== */
+.timeline { position: relative; max-width: 700px; margin: 0 auto; padding-left: 40px; border-left: 3px solid var(--corail-clair); }
+.timeline-item { position: relative; padding: 0 0 44px 30px; }
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-dot {
+  position: absolute; left: -46px; top: 4px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent); border: 3px solid var(--bg-main);
+}
+.timeline-content h3 { color: var(--accent); }
+
+/* ===================================================================
+   COMPETENCES
+=================================================================== */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
+.skill-group { background: var(--bg-main); border-radius: 24px; padding: 30px; }
+.pill-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.pill {
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.skill-group.in-view .pill { animation: pill-in .5s ease forwards; }
+.skill-group.in-view .pill:nth-child(1) { animation-delay: .05s; }
+.skill-group.in-view .pill:nth-child(2) { animation-delay: .15s; }
+.skill-group.in-view .pill:nth-child(3) { animation-delay: .25s; }
+.skill-group.in-view .pill:nth-child(4) { animation-delay: .35s; }
+@keyframes pill-in { to { opacity: 1; transform: translateY(0); } }
+.pill:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,.1); }
+.pill-rose { background: var(--rose); }
+.pill-peche { background: var(--peche); }
+.pill-corail { background: var(--corail-clair); }
+
+/* ===================================================================
+   PROJETS
+=================================================================== */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; perspective: 1000px; }
+.project-card {
+  background: var(--bg-alt);
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.05);
+  transform-style: preserve-3d;
+}
+/* higher-specificity selector wins over the generic .reveal transition,
+   so entrance (opacity/transform) and hover (box-shadow) animate together;
+   the tilt effect overrides transform's transition inline via JS while dragging */
+.projects-grid .project-card {
+  transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1), box-shadow .3s ease;
+}
+.section .project-card { background: var(--bg-main); }
+.project-card:hover { box-shadow: 0 20px 34px rgba(0,0,0,.14); }
+.project-thumb {
+  height: 160px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--bleu), var(--rose));
+  transition: transform .35s ease;
+}
+.project-card:hover .project-thumb { transform: scale(1.04); }
+
+/* ===================================================================
+   FICHES PROFESSIONNELLES
+=================================================================== */
+.experience-list { display: flex; flex-direction: column; gap: 26px; max-width: 800px; margin: 0 auto; }
+.experience-item { background: var(--bg-main); border-radius: 20px; padding: 26px 30px; }
+.experience-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.experience-head h3 { margin-bottom: 0; color: var(--accent); }
+.experience-dates { font-size: .85rem; font-weight: 500; color: var(--text); opacity: .65; }
+.experience-place { font-size: .9rem; font-weight: 500; margin: 4px 0 10px; opacity: .75; }
+
+/* ===================================================================
+   CV
+=================================================================== */
+.cv-section { text-align: center; min-height: 60vh; display: flex; align-items: center; }
+.cv-inner { max-width: 600px; margin: 0 auto; }
+.cv-inner .body-text { margin: 1rem auto 2rem; }
+
+/* ===================================================================
+   FOOTER
+=================================================================== */
+.footer { text-align: center; padding: 30px; font-size: .85rem; opacity: .6; background: var(--bg-alt); }
+
+/* ===================================================================
+   SCROLL REVEAL
+=================================================================== */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+.reveal-left { transform: translate(-40px, 12px); }
+.reveal-left.in-view { transform: translate(0, 0); }
+.reveal-right { transform: translate(40px, 12px); }
+.reveal-right.in-view { transform: translate(0, 0); }
+
+/* cascade: siblings revealed together get a staggered delay */
+.timeline-item:nth-child(1), .experience-item:nth-child(1), .project-card:nth-child(1) { transition-delay: 0s; }
+.timeline-item:nth-child(2), .experience-item:nth-child(2), .project-card:nth-child(2) { transition-delay: .08s; }
+.timeline-item:nth-child(3), .experience-item:nth-child(3), .project-card:nth-child(3) { transition-delay: .16s; }
+.timeline-item:nth-child(4), .experience-item:nth-child(4), .project-card:nth-child(4) { transition-delay: .24s; }
+.experience-item:nth-child(5), .project-card:nth-child(5) { transition-delay: .32s; }
+.experience-item:nth-child(6), .project-card:nth-child(6) { transition-delay: .4s; }
+
+/* ===================================================================
+   RESPONSIVE
+=================================================================== */
+@media (max-width: 860px) {
+  .nav-links {
+    position: fixed;
+    top: 0; right: 0;
+    height: 100vh;
+    width: min(75vw, 320px);
+    background: var(--bg-alt);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    transform: translateX(100%);
+    transition: transform .35s ease;
+    box-shadow: -8px 0 30px rgba(0,0,0,.08);
+  }
+  .nav-links.open { transform: translateX(0); }
+  .burger { display: flex; }
+  .burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .about-grid { grid-template-columns: 1fr; }
+  .hero { flex-direction: column-reverse; text-align: center; padding-top: 120px; }
+  .hero-content { text-align: center; }
+  .hero-cta { justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .navbar { padding: 14px 20px; }
+  .section { padding: 70px 18px; }
+}

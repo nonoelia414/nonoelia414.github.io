@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noélia Berbiguier — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="grain"></div>
+
+<!-- ===== CURSEUR PERSONNALISÉ (désactivé sur tactile via JS) ===== -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- ===== NAVIGATION A POINTS (suit la section active au scroll) ===== -->
+<nav class="scroll-dots" id="scrollDots" aria-label="Navigation rapide">
+  <a href="#accueil" class="dot" data-label="Accueil"></a>
+  <a href="#a-propos" class="dot" data-label="À propos"></a>
+  <a href="#parcours" class="dot" data-label="Parcours"></a>
+  <a href="#competences" class="dot" data-label="Compétences"></a>
+  <a href="#projets" class="dot" data-label="Projets"></a>
+  <a href="#fiches-pro" class="dot" data-label="Fiches pro"></a>
+  <a href="#cv" class="dot" data-label="CV"></a>
+</nav>
+
+<!-- ===== NAVIGATION ===== -->
+<header class="navbar">
+  <a href="#accueil" class="logo">Noélia<span>.</span></a>
+  <nav>
+    <ul class="nav-links">
+      <span class="nav-pill" id="navPill"></span>
+      <li><a href="#accueil" class="nav-link">Accueil</a></li>
+      <li><a href="#a-propos" class="nav-link">À propos</a></li>
+      <li><a href="#parcours" class="nav-link">Mon parcours</a></li>
+      <li><a href="#competences" class="nav-link">Compétences</a></li>
+      <li><a href="#projets" class="nav-link">Projets</a></li>
+      <li><a href="#fiches-pro" class="nav-link">Fiches pro</a></li>
+      <li><a href="#cv" class="nav-link">CV</a></li>
+    </ul>
+  </nav>
+  <button class="burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main>
+
+  <!-- ===== ACCUEIL ===== -->
+  <section id="accueil" class="section hero">
+    <div class="blob-wrap" style="top:12%;left:4%;--bs:220px;--bc:var(--sauge);--br:60% 40% 30% 70% / 60% 30% 70% 40%;--bd:9s;"><span class="blob"></span></div>
+    <div class="blob-wrap" style="bottom:8%;right:8%;--bs:180px;--bc:var(--bleu);--br:40% 60% 70% 30% / 50% 60% 40% 50%;--bd:7s;"><span class="blob"></span></div>
+    <div class="blob-wrap" style="top:50%;right:22%;--bs:90px;--bc:var(--rose);--br:50% 50% 40% 60% / 60% 40% 60% 40%;--bd:6.5s;"><span class="blob"></span></div>
+    <div class="hero-content reveal">
+      <p class="eyebrow">Bonjour, je suis</p>
+      <h1>Noélia Berbiguier</h1>
+      <h2 class="title-role">Chargée de communication</h2>
+      <p class="tagline">Créative, rigoureuse et pleine de bonne humeur — à la recherche d'une alternance en communication.</p>
+      <div class="hero-cta">
+        <a href="#projets" class="btn btn-primary">Voir mes projets</a>
+        <a href="#cv" class="btn btn-outline">Mon CV</a>
+      </div>
+    </div>
+    <div class="hero-photo reveal">
+      <div class="photo-halo-wrap"><div class="photo-halo"></div></div>
+      <div class="photo-frame">
+        <img src="assets/photo-profil.jpg" alt="Photo de Noélia Berbiguier" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== A PROPOS ===== -->
+  <section id="a-propos" class="section section-alt">
+    <div class="blob-wrap" style="top:6%;right:6%;--bs:200px;--bc:var(--peche);--br:40% 60% 60% 40% / 60% 40% 60% 40%;--bd:8.5s;"><span class="blob"></span></div>
+    <div class="blob-wrap" style="bottom:10%;left:6%;--bs:140px;--bc:var(--sauge);--br:60% 40% 30% 70% / 50% 60% 40% 50%;--bd:7.5s;"><span class="blob"></span></div>
+    <div class="section-inner about-grid">
+      <div class="reveal reveal-left">
+        <p class="eyebrow">À propos</p>
+        <h2>Qui suis-je ?</h2>
+        <p class="body-text">Texte de présentation à compléter par Noélia : parcours, motivations, ce qui la fait vibrer en communication.</p>
+      </div>
+      <div class="info-card reveal reveal-right">
+        <ul class="info-list">
+          <li><span class="info-label">Âge</span><span class="info-value">à compléter</span></li>
+          <li><span class="info-label">Ville</span><span class="info-value">à compléter</span></li>
+          <li><span class="info-label">Email</span><span class="info-value">à compléter</span></li>
+          <li><span class="info-label">Téléphone</span><span class="info-value">à compléter</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PARCOURS ===== -->
+  <section id="parcours" class="section">
+    <div class="blob-wrap" style="top:14%;right:10%;--bs:170px;--bc:var(--bleu);--br:50% 50% 70% 30% / 50% 40% 60% 50%;--bd:9s;"><span class="blob"></span></div>
+    <div class="section-inner">
+      <p class="eyebrow reveal">Mon parcours</p>
+      <h2 class="reveal">Le chemin parcouru</h2>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Baccalauréat</h3>
+            <p>Obtention du baccalauréat, première étape vers une orientation en communication.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>BTS Communication</h3>
+            <p>Formation en BTS Communication, apprentissage des fondamentaux du métier.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Compétences acquises</h3>
+            <p>Maîtrise des outils de création, gestion de réseaux sociaux et communication d'entreprise.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <h3>Objectif professionnel</h3>
+            <p>Trouver une alternance en communication pour poursuivre ma formation sur le terrain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPETENCES ===== -->
+  <section id="competences" class="section section-alt">
+    <div class="blob-wrap" style="top:8%;left:8%;--bs:190px;--bc:var(--corail-clair);--br:40% 60% 40% 60% / 60% 30% 70% 40%;--bd:8s;"><span class="blob"></span></div>
+    <div class="blob-wrap" style="bottom:6%;right:10%;--bs:150px;--bc:var(--rose);--br:60% 40% 60% 40% / 40% 60% 40% 60%;--bd:6s;"><span class="blob"></span></div>
+    <div class="section-inner">
+      <p class="eyebrow reveal">Compétences</p>
+      <h2 class="reveal">Ce que je sais faire</h2>
+      <div class="skills-grid">
+        <div class="skill-group reveal">
+          <h3>Outils</h3>
+          <div class="pill-list">
+            <span class="pill pill-rose">Canva</span>
+            <span class="pill pill-peche">Word</span>
+            <span class="pill pill-corail">Pix</span>
+            <span class="pill pill-rose">PowerPoint</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Réseaux sociaux</h3>
+          <div class="pill-list">
+            <span class="pill pill-peche">Instagram</span>
+            <span class="pill pill-corail">TikTok</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Certifications</h3>
+          <div class="pill-list">
+            <span class="pill pill-rose">ASSR1</span>
+            <span class="pill pill-peche">ASSR2</span>
+            <span class="pill pill-corail">SNU</span>
+          </div>
+        </div>
+        <div class="skill-group reveal">
+          <h3>Langues</h3>
+          <div class="pill-list">
+            <span class="pill pill-rose">Anglais courant</span>
+            <span class="pill pill-peche">Espagnol</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJETS & REALISATIONS ===== -->
+  <section id="projets" class="section">
+    <div class="blob-wrap" style="top:10%;right:5%;--bs:210px;--bc:var(--sauge);--br:50% 50% 30% 70% / 60% 40% 60% 40%;--bd:9.5s;"><span class="blob"></span></div>
+    <div class="section-inner">
+      <p class="eyebrow reveal">Réalisations</p>
+      <h2 class="reveal">Projets & réalisations</h2>
+      <div class="projects-grid">
+        <div class="project-card reveal" data-tilt><div class="project-thumb"></div><h3>Projet 1</h3><p>Description à compléter.</p></div>
+        <div class="project-card reveal" data-tilt><div class="project-thumb"></div><h3>Projet 2</h3><p>Description à compléter.</p></div>
+        <div class="project-card reveal" data-tilt><div class="project-thumb"></div><h3>Projet 3</h3><p>Description à compléter.</p></div>
+        <div class="project-card reveal" data-tilt><div class="project-thumb"></div><h3>Projet 4</h3><p>Description à compléter.</p></div>
+        <div class="project-card reveal" data-tilt><div class="project-thumb"></div><h3>Projet 5</h3><p>Description à compléter.</p></div>
+        <div class="project-card reveal" data-tilt><div class="project-thumb"></div><h3>Projet 6</h3><p>Description à compléter.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FICHES PROFESSIONNELLES ===== -->
+  <section id="fiches-pro" class="section section-alt">
+    <div class="blob-wrap" style="top:12%;left:6%;--bs:180px;--bc:var(--bleu);--br:40% 60% 60% 40% / 50% 50% 50% 50%;--bd:7s;"><span class="blob"></span></div>
+    <div class="blob-wrap" style="bottom:8%;right:8%;--bs:130px;--bc:var(--peche);--br:60% 40% 40% 60% / 60% 40% 60% 40%;--bd:6.5s;"><span class="blob"></span></div>
+    <div class="section-inner">
+      <p class="eyebrow reveal">Expériences</p>
+      <h2 class="reveal">Fiches professionnelles</h2>
+      <div class="experience-list">
+        <div class="experience-item reveal">
+          <div class="experience-head">
+            <h3>Serveuse polyvalente</h3>
+            <span class="experience-dates">Dates à compléter</span>
+          </div>
+          <p class="experience-place">Lieu à compléter</p>
+          <p class="body-text">Description à compléter.</p>
+        </div>
+        <div class="experience-item reveal">
+          <div class="experience-head">
+            <h3>Fille au pair</h3>
+            <span class="experience-dates">Dates à compléter</span>
+          </div>
+          <p class="experience-place">Lieu à compléter</p>
+          <p class="body-text">Description à compléter.</p>
+        </div>
+        <div class="experience-item reveal">
+          <div class="experience-head">
+            <h3>Employée de maison</h3>
+            <span class="experience-dates">Dates à compléter</span>
+          </div>
+          <p class="experience-place">Lieu à compléter</p>
+          <p class="body-text">Description à compléter.</p>
+        </div>
+        <div class="experience-item reveal">
+          <div class="experience-head">
+            <h3>Garde d'enfants</h3>
+            <span class="experience-dates">Dates à compléter</span>
+          </div>
+          <p class="experience-place">Lieu à compléter</p>
+          <p class="body-text">Description à compléter.</p>
+        </div>
+        <div class="experience-item reveal">
+          <div class="experience-head">
+            <h3>Agent d'entretien</h3>
+            <span class="experience-dates">Dates à compléter</span>
+          </div>
+          <p class="experience-place">Lieu à compléter</p>
+          <p class="body-text">Description à compléter.</p>
+        </div>
+        <div class="experience-item reveal">
+          <div class="experience-head">
+            <h3>Assistante de réception</h3>
+            <span class="experience-dates">Dates à compléter</span>
+          </div>
+          <p class="experience-place">Lieu à compléter</p>
+          <p class="body-text">Description à compléter.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MON CV ===== -->
+  <section id="cv" class="section cv-section">
+    <div class="blob-wrap" style="top:20%;left:50%;--bs:240px;--bc:var(--corail-clair);--br:50% 50% 40% 60% / 60% 40% 60% 40%;--bd:10s;"><span class="blob"></span></div>
+    <div class="section-inner cv-inner reveal">
+      <p class="eyebrow">Mon CV</p>
+      <h2>Télécharger mon CV</h2>
+      <p class="body-text">Retrouvez l'ensemble de mon parcours, mes compétences et mes expériences dans mon CV complet, disponible au format PDF.</p>
+      <a href="#" class="btn btn-primary" download>Télécharger mon CV</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>&copy; 2026 Noélia Berbiguier — Tous droits réservés</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
